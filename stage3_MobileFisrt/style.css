@@ -91,15 +91,77 @@ main p{
   
 }
 
-
-.card {
+.card, .card2{
   position: relative;
+  margin-bottom: 3.2rem;
 }
 
 .card img{
+  position: relative;
   height: 25rem;
-  width: 25rem;
+  width: 32rem;
   object-fit: cover;
 
   border-radius: 2rem;
+}
+
+.card2 img{
+  position: relative;
+  height: 45rem;
+  width: 32rem;
+  object-fit: cover;
+
+  border-radius: 2rem;
+}
+
+.card h2, .card2 h2{
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+
+  display: inline-flex;
+  align-items: center;
+  height: 3rem;
+  
+  font-family: var(--fontfamily-main);
+  color: var(--font-colorcards);
+  font-weight: 400;
+  padding: 0 1.6rem;
+  letter-spacing: 0.05em;
+
+  border-radius: 2rem;
+  background-color: white;
+}
+
+.card, .card2 {
+  animation: downtop 600ms backwards;
+}
+
+.card h2, .card2 h2{
+  animation: topdown 600ms 300ms backwards;
+}
+
+
+@keyframes topdown {
+  0%{
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100%{
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+@keyframes downtop{
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
