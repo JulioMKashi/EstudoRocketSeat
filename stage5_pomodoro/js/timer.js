@@ -1,3 +1,10 @@
+export function Timer({
+  minutesDisplay,
+  secondsDisplay,
+  timerTimeOut,
+  resetControls
+}){
+
 function resetTimer() {
   updateTimerDisplay(minutes, 0)
   clearTimeout(timerTimeOut)
@@ -31,4 +38,9 @@ function countdown(){
   }, 1000)
 }
 
-export {countdown, resetTimer}
+return{
+  countdown,
+  resetTimer
+}
+
+}
