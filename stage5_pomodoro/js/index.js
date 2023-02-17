@@ -59,6 +59,6 @@ buttonSet.addEventListener('click', function(){
     return
   }
 
-  timer.updateDisplay(newMinutes, 0)
   timer.updateMinutes(newMinutes)
+  timer.updateDisplay(newMinutes, 0)
 })

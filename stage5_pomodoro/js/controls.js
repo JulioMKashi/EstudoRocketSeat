@@ -28,7 +28,6 @@ function getMinutes(){
 
   let newMinutes = prompt("quantos minutos?") 
   if(!newMinutes){
-    timer.resetTimer()
     return false
   }
 
