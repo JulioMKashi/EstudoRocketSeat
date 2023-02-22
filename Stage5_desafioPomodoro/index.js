@@ -11,6 +11,31 @@ const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
 let minutes = Number(minutesDisplay.textContent)
 
+function countdown(){
+    setTimeout(function(){
+        let seconds = Number(secondsDisplay.textContent)    
+
+        if(seconds <= 0){
+            seconds = 60
+        }
+
+        secondsDisplay.textContent = seconds - 1
+        countdown()
+    }, 1000)
+}
+
+function addFiveMinutes(){
+    minutes = Number(minutesDisplay.textContent)
+    minutesDisplay.textContent = minutes + 5
+}
+
+function removeFiveMinutes(){
+    minutes = Number(minutesDisplay.textContent)
+    minutesDisplay.textContent = minutes - 5
+    if(minutes <= 0 ){
+        minutesDisplay.textContent = 25
+    }
+}
 buttonForestMusic.addEventListener('click', function(){
     buttonForestMusic.classList.add('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
@@ -44,10 +69,7 @@ buttonPlay.addEventListener('click', function(){
     buttonPlay.classList.add('hide')
     buttonPause.classList.remove('hide')
 
-    setTimeout(function(){
-        let seconds = Number(secondsDisplay.textContent)
-
-    }, 1000)
+  countdown()
 })
 
 buttonPause.addEventListener('click', function(){
@@ -62,11 +84,10 @@ buttonStop.addEventListener('click', function(){
 })
 
 buttonPlus.addEventListener('click', function(){
-    minutesDisplay.textContent = minutes + 5
-     
+    addFiveMinutes()
 })
 
 buttonMinus.addEventListener('click', function(){
-    minutesDisplay.textContent = minutes - 5
+    removeFiveMinutes()
 })
 
