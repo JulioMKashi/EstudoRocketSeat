@@ -14,12 +14,21 @@ let minutes = Number(minutesDisplay.textContent)
 function countdown(){
     setTimeout(function(){
         let seconds = Number(secondsDisplay.textContent)    
+        let minutes = Number(minutesDisplay.textContent)
+        
+        secondsDisplay.textContent = "00"
 
-        if(seconds <= 0){
-            seconds = 60
+        if(minutes <= 0 && seconds <= 0) {
+            return
         }
 
-        secondsDisplay.textContent = seconds - 1
+        if(seconds <= 0){
+            seconds = 2
+
+            minutesDisplay.textContent = String(minutes - 1).padStart(2, "0")
+        }
+
+        secondsDisplay.textContent = String(seconds - 1).padStart(2, "0")
         countdown()
     }, 1000)
 }
@@ -36,12 +45,19 @@ function removeFiveMinutes(){
         minutesDisplay.textContent = 25
     }
 }
+let secondClick = 0
 buttonForestMusic.addEventListener('click', function(){
     buttonForestMusic.classList.add('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
-    
+
+    secondClick++
+
+    if (secondClick >= 2){
+        buttonForestMusic.classList.remove('selectedCard')
+        secondClick = 0
+    }
 })
 
 buttonRainMusic.addEventListener('click', function(){
@@ -49,6 +65,13 @@ buttonRainMusic.addEventListener('click', function(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+
+    secondClick++
+
+    if (secondClick >= 2){
+        buttonRainMusic.classList.remove('selectedCard')
+        secondClick = 0
+    }
 })
 
 buttonCoffeeShopMusic.addEventListener('click', function(){
@@ -56,6 +79,13 @@ buttonCoffeeShopMusic.addEventListener('click', function(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+
+    secondClick++
+
+    if (secondClick >= 2){
+        buttonCoffeeShopMusic.classList.remove('selectedCard')
+        secondClick = 0
+    }
 })
 
 buttonFirePlaceMusic.addEventListener('click', function(){
@@ -63,6 +93,13 @@ buttonFirePlaceMusic.addEventListener('click', function(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
+
+    secondClick++
+
+    if (secondClick >= 2){
+        buttonFirePlaceMusic.classList.remove('selectedCard')
+        secondClick = 0
+    }
 })
 
 buttonPlay.addEventListener('click', function(){
