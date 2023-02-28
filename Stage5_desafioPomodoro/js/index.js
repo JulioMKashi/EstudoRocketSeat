@@ -1,3 +1,6 @@
+import { Timer } from "./timer.js"
+import { Controls } from "./controls.js"
+
 const buttonForestMusic = document.querySelector('.forest')
 const buttonRainMusic = document.querySelector('.rain')
 const buttonCoffeeShopMusic = document.querySelector('.coffeeShop')
@@ -9,55 +12,29 @@ const buttonPlus = document.querySelector('.plusMinutes')
 const buttonMinus = document.querySelector('.minusMinutes')
 const minutesDisplay = document.querySelector('.minutes')
 const secondsDisplay = document.querySelector('.seconds')
-let minutes = Number(minutesDisplay.textContent)
+let minutes = Number(document.querySelector('.minutes').textContent)
+let secondClick = document.querySelector('.secondCard')
 
-function countdown(){
-    setTimeout(function(){
-        let seconds = Number(secondsDisplay.textContent)    
-        let minutes = Number(minutesDisplay.textContent)
-        
-        secondsDisplay.textContent = "00"
+const controls = Controls({
+    buttonPlay,
+    buttonPause,
+    buttonStop,
+})
 
-        if(minutes <= 0 && seconds <= 0) {
-            return
-        }
+const timer = Timer({
+    minutesDisplay,
+    secondsDisplay,
+    minutes
+}) 
 
-        if(seconds <= 0){
-            seconds = 2
 
-            minutesDisplay.textContent = String(minutes - 1).padStart(2, "0")
-        }
-
-        secondsDisplay.textContent = String(seconds - 1).padStart(2, "0")
-        countdown()
-    }, 1000)
-}
-
-function addFiveMinutes(){
-    minutes = Number(minutesDisplay.textContent)
-    minutesDisplay.textContent = minutes + 5
-}
-
-function removeFiveMinutes(){
-    minutes = Number(minutesDisplay.textContent)
-    minutesDisplay.textContent = minutes - 5
-    if(minutes <= 0 ){
-        minutesDisplay.textContent = 25
-    }
-}
-let secondClick = 0
 buttonForestMusic.addEventListener('click', function(){
     buttonForestMusic.classList.add('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
 
-    secondClick++
-
-    if (secondClick >= 2){
-        buttonForestMusic.classList.remove('selectedCard')
-        secondClick = 0
-    }
+    timer.secondClickIncrement(secondClick)
 })
 
 buttonRainMusic.addEventListener('click', function(){
@@ -65,6 +42,8 @@ buttonRainMusic.addEventListener('click', function(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+
+    let secondClick = 0
 
     secondClick++
 
@@ -80,6 +59,8 @@ buttonCoffeeShopMusic.addEventListener('click', function(){
     buttonRainMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
 
+    let secondClick = 0
+
     secondClick++
 
     if (secondClick >= 2){
@@ -94,6 +75,8 @@ buttonFirePlaceMusic.addEventListener('click', function(){
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
 
+    let secondClick = 0
+
     secondClick++
 
     if (secondClick >= 2){
@@ -103,28 +86,35 @@ buttonFirePlaceMusic.addEventListener('click', function(){
 })
 
 buttonPlay.addEventListener('click', function(){
-    buttonPlay.classList.add('hide')
-    buttonPause.classList.remove('hide')
-
-  countdown()
+    controls.play()
+    timer.countdown()
 })
 
 buttonPause.addEventListener('click', function(){
-    buttonPause.classList.add('hide')
-    buttonPlay.classList.remove('hide')
-    buttonStop.classList.remove('hide')
+    controls.pause()
 })
 
 buttonStop.addEventListener('click', function(){
-    buttonStop.classList.add('hide')
-    buttonPause.classList.add('hide')
-})
+    controls.resetControls()
+    timer.resetTimer()
+    
+  })
 
-buttonPlus.addEventListener('click', function(){
-    addFiveMinutes()
+  buttonPlus.addEventListener('click', function(){
+    timer.addFiveMinutes()
 })
 
 buttonMinus.addEventListener('click', function(){
-    removeFiveMinutes()
+    timer.removeFiveMinutes()
 })
+
+
+
+
+
+
+
+
+
+
 
