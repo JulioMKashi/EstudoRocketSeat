@@ -2,7 +2,7 @@
 export function Timer({
     minutesDisplay,
     secondsDisplay,
-    minutes
+    minutes,
 }){
 
     let timeOut
@@ -33,22 +33,6 @@ function countdown(){
     }, 1000)
 }
 
-function secondClickIncrement(secondClick){
-    
-    if(secondClick = 1){
-        secondClick++
-    }
-
-    if (secondClick = null){
-    secondClick = 1}
-    
-    console.log(secondClick)
-    if (secondClick >= 2){
-        buttonForestMusic.classList.remove('selectedCard')
-        secondClick = 0
-    }
-}
-
 function addFiveMinutes(){
     minutes = Number(minutesDisplay.textContent)
     updateDisplay(minutes + 5, 0)
@@ -63,6 +47,10 @@ function removeFiveMinutes(){
     }
 }
 
+function hold(){
+    clearTimeout(timeOut)
+}
+
 function resetTimer() {
     clearTimeout(timeOut)
     updateDisplay(minutes, 0)
@@ -72,9 +60,8 @@ function resetTimer() {
         resetTimer,
         removeFiveMinutes,
         addFiveMinutes,
-        secondClickIncrement,
         countdown,
         updateDisplay,
-        timeOut
+        hold
     }
 }

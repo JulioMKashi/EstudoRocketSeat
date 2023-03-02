@@ -1,24 +1,29 @@
 import { Timer } from "./timer.js"
 import { Controls } from "./controls.js"
-
-const buttonForestMusic = document.querySelector('.forest')
-const buttonRainMusic = document.querySelector('.rain')
-const buttonCoffeeShopMusic = document.querySelector('.coffeeShop')
-const buttonFirePlaceMusic = document.querySelector('.firePlace')
-const buttonPlay = document.querySelector('.play')
-const buttonPause = document.querySelector('.pause')
-const buttonStop = document.querySelector('.stop')
-const buttonPlus = document.querySelector('.plusMinutes')
-const buttonMinus = document.querySelector('.minusMinutes')
-const minutesDisplay = document.querySelector('.minutes')
-const secondsDisplay = document.querySelector('.seconds')
-let minutes = Number(document.querySelector('.minutes').textContent)
-let secondClick = document.querySelector('.secondCard')
+import Music from "./music.js"
+import {
+    buttonForestMusic,
+    buttonRainMusic,
+    buttonCoffeeShopMusic,
+    buttonFirePlaceMusic,
+    buttonPlay,
+    buttonPause,
+    buttonStop,
+    buttonPlus,
+    buttonMinus,
+    minutesDisplay,
+    secondsDisplay,
+    minutes
+} from "./elemests.js"
 
 const controls = Controls({
     buttonPlay,
     buttonPause,
     buttonStop,
+    buttonCoffeeShopMusic,
+    buttonFirePlaceMusic,
+    buttonForestMusic,
+    buttonRainMusic
 })
 
 const timer = Timer({
@@ -27,62 +32,30 @@ const timer = Timer({
     minutes
 }) 
 
+const music = Music()
 
 buttonForestMusic.addEventListener('click', function(){
-    buttonForestMusic.classList.add('selectedCard')
-    buttonRainMusic.classList.remove('selectedCard')
-    buttonCoffeeShopMusic.classList.remove('selectedCard')
-    buttonFirePlaceMusic.classList.remove('selectedCard')
-
-    timer.secondClickIncrement(secondClick)
+    controls.forestHighlight()
+    controls.secondClickIncrementForest()
+    music.playMusicForest()
 })
 
 buttonRainMusic.addEventListener('click', function(){
-    buttonRainMusic.classList.add('selectedCard')
-    buttonForestMusic.classList.remove('selectedCard')
-    buttonCoffeeShopMusic.classList.remove('selectedCard')
-    buttonFirePlaceMusic.classList.remove('selectedCard')
-
-    let secondClick = 0
-
-    secondClick++
-
-    if (secondClick >= 2){
-        buttonRainMusic.classList.remove('selectedCard')
-        secondClick = 0
-    }
+    controls.rainHighlight()
+    controls.secondClickIncrementRain()
+    music.playMusicRain()
 })
 
 buttonCoffeeShopMusic.addEventListener('click', function(){
-    buttonCoffeeShopMusic.classList.add('selectedCard')
-    buttonForestMusic.classList.remove('selectedCard')
-    buttonRainMusic.classList.remove('selectedCard')
-    buttonFirePlaceMusic.classList.remove('selectedCard')
-
-    let secondClick = 0
-
-    secondClick++
-
-    if (secondClick >= 2){
-        buttonCoffeeShopMusic.classList.remove('selectedCard')
-        secondClick = 0
-    }
+    controls.coffeeShopHighlight()
+    controls.secondClickIncrementCoffee()
+    music.playMusicCoffeePlace()
 })
 
 buttonFirePlaceMusic.addEventListener('click', function(){
-    buttonFirePlaceMusic.classList.add('selectedCard')
-    buttonForestMusic.classList.remove('selectedCard')
-    buttonRainMusic.classList.remove('selectedCard')
-    buttonCoffeeShopMusic.classList.remove('selectedCard')
-
-    let secondClick = 0
-
-    secondClick++
-
-    if (secondClick >= 2){
-        buttonFirePlaceMusic.classList.remove('selectedCard')
-        secondClick = 0
-    }
+    controls.firePlaceHighlight()
+    controls.secondClickIncrementFire()
+    music.playMusicFirePlace()
 })
 
 buttonPlay.addEventListener('click', function(){
@@ -92,6 +65,7 @@ buttonPlay.addEventListener('click', function(){
 
 buttonPause.addEventListener('click', function(){
     controls.pause()
+    timer.hold()
 })
 
 buttonStop.addEventListener('click', function(){
