@@ -35,43 +35,49 @@ const timer = Timer({
 const music = Music()
 
 buttonForestMusic.addEventListener('click', function(){
+    music.buttonPress()
+    music.buttonPressForest.play()
     controls.forestHighlight()
     controls.secondClickIncrementForest()
-    music.playMusicForest()
 })
 
 buttonRainMusic.addEventListener('click', function(){
+    music.buttonPress()
+    music.buttonPressRain.play()
     controls.rainHighlight()
     controls.secondClickIncrementRain()
-    music.playMusicRain()
 })
 
 buttonCoffeeShopMusic.addEventListener('click', function(){
+    music.buttonPress()
+    music.buttonPressCoffeePlace.play()
     controls.coffeeShopHighlight()
     controls.secondClickIncrementCoffee()
-    music.playMusicCoffeePlace()
 })
 
 buttonFirePlaceMusic.addEventListener('click', function(){
+    music.buttonPress()
+    music.buttonPressFirePlace.play()
     controls.firePlaceHighlight()
     controls.secondClickIncrementFire()
-    music.playMusicFirePlace()
 })
 
 buttonPlay.addEventListener('click', function(){
     controls.play()
     timer.countdown()
+    music.buttonPress()
 })
 
 buttonPause.addEventListener('click', function(){
     controls.pause()
     timer.hold()
+    music.buttonPress()
 })
 
 buttonStop.addEventListener('click', function(){
     controls.resetControls()
     timer.resetTimer()
-    
+    music.buttonPress()
   })
 
   buttonPlus.addEventListener('click', function(){
