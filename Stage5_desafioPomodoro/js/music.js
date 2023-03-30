@@ -2,10 +2,10 @@
 
 export default function Music(){
 
-    const buttonPressForest = new Audio("Floresta.wav")
-    const buttonPressRain = new Audio()
-    const buttonPressCoffeePlace = new Audio()
-    const buttonPressFirePlace = new Audio()
+    const buttonPressForest = new Audio("https://github.com/JulioMKashi/EstudoRocketSeat/blob/main/Stage5_desafioPomodoro/audios/Floresta.wav")
+    const buttonPressRain = new Audio("https://github.com/JulioMKashi/EstudoRocketSeat/blob/main/Stage5_desafioPomodoro/audios/Chuva.wav")
+    const buttonPressCoffeePlace = new Audio("https://github.com/JulioMKashi/EstudoRocketSeat/blob/main/Stage5_desafioPomodoro/audios/Cafeteria.wav")
+    const buttonPressFirePlace = new Audio("https://github.com/JulioMKashi/EstudoRocketSeat/blob/main/Stage5_desafioPomodoro/audios/Lareira.wav")
 
     function playMusicForest(){
         buttonPressForest.play()
