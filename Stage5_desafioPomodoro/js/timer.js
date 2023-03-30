@@ -1,3 +1,5 @@
+import { Controls } from "./controls.js"
+import Music from "./music.js"
 
 export function Timer({
     minutesDisplay,
@@ -20,6 +22,7 @@ function countdown(){
         secondsDisplay.textContent = "00"
 
         if(minutes <= 0 && seconds <= 0) {
+            Music().endTimer()
             return
         }
 
@@ -40,10 +43,15 @@ function addFiveMinutes(){
 
 function removeFiveMinutes(){
     minutes = Number(minutesDisplay.textContent)
-    updateDisplay(minutes - 5, 0)
+    if(minutes >= 5){
+        updateDisplay(minutes - 5, secondsDisplay.textContent)
+    }
+    else if (minutes <=5){
+        updateDisplay(minutes - 1, secondsDisplay.textContent)
+    }
     if(minutes <= 0 ){
         minutesDisplay.textContent = 25
-        resetControls()
+        Controls().resetControls()
     }
 }
 

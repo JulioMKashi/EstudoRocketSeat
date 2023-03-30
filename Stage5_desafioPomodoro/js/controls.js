@@ -1,4 +1,4 @@
-
+import Music from "./music.js"
 export function Controls({
     buttonPlay,
     buttonPause,
@@ -36,6 +36,9 @@ function forestHighlight(){
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+    Music().buttonPressRain.pause()
+    Music().buttonPressFirePlace.pause()
+    Music().buttonPressCoffeePlace.pause()
 }
 
 function rainHighlight(){
@@ -43,6 +46,9 @@ function rainHighlight(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+    Music().buttonPressForest.pause()
+    Music().buttonPressFirePlace.pause()
+    Music().buttonPressCoffeePlace.pause()
 }
 
 function coffeeShopHighlight(){
@@ -50,6 +56,9 @@ function coffeeShopHighlight(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonFirePlaceMusic.classList.remove('selectedCard')
+    Music().buttonPressForest.pause()
+    Music().buttonPressFirePlace.pause()
+    Music().buttonPressRain.pause()
 }
 
 function firePlaceHighlight(){
@@ -57,6 +66,9 @@ function firePlaceHighlight(){
     buttonForestMusic.classList.remove('selectedCard')
     buttonRainMusic.classList.remove('selectedCard')
     buttonCoffeeShopMusic.classList.remove('selectedCard')
+    Music().buttonPressForest.pause()
+    Music().buttonPressCoffeePlace.pause()
+    Music().buttonPressRain.pause()
 }
 
 function secondClickIncrementForest(){
@@ -70,6 +82,8 @@ function secondClickIncrementForest(){
     if (secondClickFore >= 2){
         buttonForestMusic.classList.remove('selectedCard')
         secondClickFore = 0
+        Music().buttonPressForest.pause()
+        Music().buttonPressCoffeePlace.play()
     }
 }
 
@@ -84,6 +98,7 @@ function secondClickIncrementRain(){
     if (secondClickRain >= 2){
         buttonRainMusic.classList.remove('selectedCard')
         secondClickRain = 0
+        Music().buttonPressRain.pause()
     }
 }
 
@@ -98,6 +113,7 @@ function secondClickIncrementCoffee(){
     if (secondClickCoff >= 2){
         buttonCoffeeShopMusic.classList.remove('selectedCard')
         secondClickCoff = 0
+        Music().buttonPressCoffeePlace.pause()
     }
 }
 
@@ -112,6 +128,7 @@ function secondClickIncrementFire(){
     if (secondClickFire >= 2){
         buttonFirePlaceMusic.classList.remove('selectedCard')
         secondClickFire = 0
+        Music().buttonPressFirePlace.pause()
     }
 }
 
