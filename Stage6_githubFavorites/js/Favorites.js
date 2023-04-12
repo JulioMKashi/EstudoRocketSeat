@@ -6,10 +6,13 @@ export class Favorites {
         this.root = document.querySelector(root)
         this.load()
 
+        GithubUser.search('diego3g').then(user => console.log("aaaaa"))
+
     }
 
     load(){
-        this.userEntries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
+        this.userEntries = JSON.parse(localStorage.getItem
+            ('@github-favorites:')) || [] //key name to access the LocalStorage
 
     }
 
@@ -42,7 +45,7 @@ export class Favorites {
     delete(user) {
         //Higher-order funcitons (map,filter, find, reduce)
         const filteredEntries = this.userEntries
-        .filter(entry => entry.login !== user.login) //essa arrowF de uma linha faz só o retorno
+        .filter(entry => entry.login !== user.login) //this arrowF of just one line do just de return of the value
 
         this.userEntries = filteredEntries
         this.update()
@@ -122,8 +125,7 @@ export class FavoritesView extends Favorites {
     }
 
     removeAllTr(){
-        this.tbody.querySelectorAll('tr')
-        .forEach((tr) => {
+        this.tbody.querySelectorAll('tr').forEach((tr) => {
             tr.remove()
         })
     }

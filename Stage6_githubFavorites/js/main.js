@@ -1,4 +1,4 @@
-import { FavoritesView } from "./Fovorites.js";
+import { FavoritesView } from "./Favorites.js";
 
 new FavoritesView("#app");
 
