@@ -1,4 +1,5 @@
 import { GithubUser } from "./GithubUser.js"
+
 export class Favorites{
      constructor(root){
         this.root = document.querySelector(root)
@@ -21,9 +22,9 @@ export class Favorites{
             if(userExists) {
                 throw new Error('Usuário já cadastrado')
             }
+            
             const user = await GithubUser.search(username)
-
-            if(user.login === undefined) {
+            if(user === undefined) {
                 throw new Error('Usuário não encontrado')
             }
 
@@ -46,7 +47,7 @@ export class Favorites{
     }
     
 }
-
+//html modifier
 export class FavoritesView extends Favorites{
     constructor (root) {
         super(root)
@@ -54,10 +55,11 @@ export class FavoritesView extends Favorites{
         this.tbody = this.root.querySelector('table tbody')
         this.update()
         this.onAdd()
+
     }
 
     onAdd(){
-        const addButton = this.root.querySelector('.search button')
+        const addButton = this.root.querySelector('.search button.favorite')
         addButton.onclick = () => {
             const{ value } = this.root.querySelector('.search input')
             console.log(value)
@@ -67,32 +69,39 @@ export class FavoritesView extends Favorites{
 
     update() {
         this.removeAllTr()
+        this.tfoot = this.root.querySelector('table tfoot')
+        
+        if(this.userEntries && this.userEntries.length > 0){
+            this.userEntries.forEach(user => {
+                this.tfoot.classList.add('hide')
+                const row = this.createRow()
+                
+                row.querySelector('.user img').src = `http://github.com/${user.login}.png`
+                row.querySelector('.user img').alt = `Imagem de ${user.name}`
+                row.querySelector('.user a').href = `https://github.com/${user.login}`
+                row.querySelector('.user p').textContent = user.name
+                row.querySelector('.user span').textContent = user.login
+                row.querySelector('.repositories').textContent = user.public_repos
+                row.querySelector('.followers').textContent = user.followers    
 
-        this.userEntries.forEach(user => {
-            const row = this.createRow()
-
-            row.querySelector('.user img').src = `http://github.com/${user.login}.png`
-            row.querySelector('.user img').alt = `Imagem do usuário ${user.name}`
-            row.querySelector('.user a').href = `https://github.com/${user.login}`
-            row.querySelector('.user p').textContent = user.name
-            row.querySelector('.user span').textContent = user.login
-            row.querySelector('.repositories').textContent = user.public_repos
-            row.querySelector('followers').textContent = user.followers 
-
-            row.querySelector('remove').onclick = () => {
-                const isOk = confirm('Tem Certeza que deseja deletar essa linha?')
-                if(isOk) {
-                    this.delete(user)
+                row.querySelector('.remove').onclick = () => {
+                    const isOk = confirm('Tem Certeza que deseja deletar essa linha?')
+                    if(isOk) {
+                        this.delete(user)
+                    }
                 }
-            }
-            this.tbody.append(row)
-        })
+                this.tbody.append(row)
+            })
+        }
+        else {
+            this.userEntries = []
+            this.tfoot.classList.remove('hide')
+        }
     }
 
     createRow(){
         const tr = document.createElement('tr')
             tr.innerHTML = `
-            <tr>
                 <td class="user">
                     <img src="https://github.com/maykbrito.png" alt="">
                     <a href="https://github.com/maykbrito" target="_blank">
@@ -109,7 +118,6 @@ export class FavoritesView extends Favorites{
                 <td>
                     <button class="remove">Remove</button>
                 </td>
-            </tr>
         `
 
         return tr 
